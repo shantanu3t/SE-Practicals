@@ -1,86 +1,58 @@
-# both cricket and badminton
-def CriandBad(a,b):
-    GroupCriBad=[]
-    for item in a:
-        if(item in b):
-            item.append(GroupCriBad)
-    print(GroupCriBad)
 
-# either cricket or badminton but not both
-def CriorBadnotboth(a,b):
-    GroupCriorBadnotboth=[]
-    for item in a:
-        if(item not in b):
-            item.append(GroupCriorBadnotboth)
-    for item in b:
-        if(item not in a and item not in GroupCriorBadnotboth):
-            item.append(GroupCriorBadnotboth)
-    print(GroupCriorBadnotboth)
-
-# Only foot ball
-def onlyfootball(a,b,c):
-    GroupOnlyFootball=[]
-    for item in a:
-        if(item not in b and item not in c):
-            GroupOnlyFootball.append(item)
-    print(len(GroupOnlyFootball))
+list0=["om","adi","vedang","vivek","rahul","virat","rohit","messi","ronaldo"]
+list1=["om","adi","vedang","vivek"]          #cricket
+list2=["rahul","virat","rohit","om"]         #badminton
+list3=["messi","ronaldo","vivek"]            #football
+r1=[]
+r2=[]
+r3=[]
+r4=[]
+r5=[]
+r6=[]
+def fun1():
+     for i in list1:
+         if i in list2:
+                 r1.append(i)
+     print(r1)
+fun1()
 
 
-# cricket and football but not badminton
-def CriandFootnotBad(a,b,c):
-    GroupCriandFootnotbad=[]
-    for item in a:
-        if(item in b and item not in c):
-            GroupCriandFootnotbad.append(item)
-    print(len(GroupCriandFootnotbad))
+def func2():
+        
+     for i in list1:
+         if i not in list2:
+             r2.append(i)
 
-    
-if __name__=='__main__':
-    GroupACri=[]
-    GroupBBad=[]
-    GroupCFoot=[]
-    choice=0
-    while(choice!=5):
+     for j in list2:
+         if j not in list1:
+            r2.append(j)
+            
+     print(r2)
+func2()
 
-        print('''\n
-                    ********MENU**********
-                1. Enter the information of student
-                2. List of student who plays both cricket and badminton 
-                3. List of student who plays cricket or badminton but not both
-                4. Number of student who plays neither cricket not badminton
-                5. Number of student who plays cricket and football not badminton 
-                6. Exit\n
-            ''')
-        choice=int(input("Enter your choice :"))
-        if(choice==1):
-            GroupA=int(input("\nEnter the no of student in group A :"))
-            for i in range(GroupA):
-                a=int(input("Enter the roll no of student :"))
-                GroupACri.append(a)
 
-            GroupB=int(input("\nEnter the no of student in group B :"))
-            for i in range(GroupB):
-                a=int(input("Enter the roll no of student :"))
-                GroupBBad.append(a)
+def func3():
+    r3=list1+list2
 
-            GroupC=int(input("\nEnter the no of student in group C :"))
-            for i in range(GroupC):
-                a=int(input("Enter the roll no of student :"))
-                GroupCFoot.append(a)
-        elif(choice==2):
-            print("Student who plays both cricket and badminton :",CriandBad(GroupACri,GroupBBad))
+    for i in list0:
+        if i not in r3:
+            r4.append(i)
+    print(len(r4))
+func3()
 
-        elif(choice==3):
-            print("Student who plays cricket or badminton but not both :",CriorBadnotboth(GroupACri,GroupBBad))
-    
-        elif(choice==3):
-            print("Number of student who plays neither cricket not badminton :",onlyfootball(GroupCFoot,GroupACri,GroupBBad))
 
-        elif(choice==4):
-            print("Number of student who plays cricket and football not badminton ",CriandFootnotBad(GroupACri,GroupCFoot,GroupBBad))
-        elif(choice==5):
-            break
-        else:
-            print("Invalid")
-    
- 
+def func4():
+    for i in list1:
+        if i not in list2:
+           # if i not in list3:
+                r5.append(i)
+    for j in list3:
+        if j not in list2:
+             if j not in list1:
+                 r5.append(j)
+    print(r5)
+    print(len(r5))    
+
+                
+func4()    
+     
