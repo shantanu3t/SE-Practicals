@@ -1,85 +1,96 @@
-def linear_Search(list1,target):
-    for i in range(len(list1)):
-        if(list1[i]==target):
-            return i
-    return -1
+def l_search(p, n, list1):
+    c = 0
+    for i in range(n):
+        if (list1[i] == p):
+            print("Roll Number %d did attend the training program." % (p))
+            break
+        else:
+            c = c+1
+    if (c == n):
+        print("Roll Number %d did not attend the training program." % (p))
 
-def sentinel_Search(list1,target):
-    ln=len(list1)
-    if(list1[ln-1]==target):
-        return ln-1
+
+def s_search(p, n, list1):
+    k = 0
+    for i in range(n+1):
+        if (list1[i] == p):
+            k = i
+            break
+    if (k == n):
+        print("Roll Number %d did not attend the training program." % (p))
+    elif (k < n):
+        print("Roll Number %d did attend the training program." % (p))
+
+
+def b_search(p, list1, h, l):
+    mid = int((h+l)/2)
+    if (p == list1[mid]):
+        return mid
+    elif (p < list1[mid]):
+        return b_search(p, list1, mid-1, l)
     else:
-        for i in range(ln):
-            if(list1[i]==target):
-                return i
-    return -1
-
-def binary_Search(list1,target):
-    start=0
-    end=len(list1)-1
-    while(start<=end):
-        mid=end+start//2
-        if(list1[mid]==target):
-            return mid
-        elif(list1[mid]>target):
-            end=mid-1
-        elif(list1[mid]<target):
-            start= mid+1
-    
-    return -1
+        return b_search(p, list1, h, mid+1)
 
 
-if __name__=='__main__':
-    print('''
-            *************Menu***********
-    
-            1. Enter list
-            2. Linear search
-            3. Sentinel search
-            4. Binary search
-            5. Fibonnaci search
-            6. break
-            ''')
-    option =0
-    lis=[1,2,3,4,5,6,7,8]
+def fibMonaccianSearch(list1, p, n):
+    fim2 = 0
+    fim1 = 1
+    fibM = fim2 + fim1
+    while (fibM < n):
+        fim2 = fim1
+        fim1 = fibM
+        fibM = fim2 + fim1
+        offset = -1
+    while (fibM > 1):
+        i = min(offset+fim2, n-1)
+        if (list1[i] < p):
+            fibM = fim1
+            fim1 = fim2
+            fim2 = fibM - fim1
+            offset = i
+        elif (list1[i] > p):
+            fibM = fim2
+            fim1 = fim1 - fim2
+            fim2 = fibM - fim1
+        else:
+            return i
+    if (fim1 and list1[n-1] == p):
+        return n-1
+        return -1
 
-    while(option!=6):
-        option=int(input("Enter the option: "))
 
+list1 = []
+n = int(input("Enter the number of students who attended the program:"))
+for i in range(n):
+    m = int(input("Enter roll no.%d :" % (i+1)))
+    list1.append(m)
+p = int(input("\nEnter the key:"))
+print("Menu: \n1.Linear Search\n2.Sentinal Search\n3.Binary Search\n4.FibonacciSearch\n5.Exit")
+while (1):
+    s = int(input("\nChoose your option:"))
+    if (s == 1):
+        print("\nLinear Search:")
+        l_search(p, n, list1)
+    elif (s == 2):
+        print("\nSentinal Search:")
+        list1.append(p)
+        s_search(p, n, list1)
 
-        if(option==1):
-            leng=int(input("Enter the length of string: "))
-            for i in range(leng):
-                l=int(input(f"Enter the {i}th element :"))
-                lis.append(l)
-
-    
-        elif(option==2):
-            target=int(input("Enter the target: "))
-            if(linear_Search(lis,target)==-1):
-                print("Element not found")
-            else:
-                print(f"Element on {linear_Search(lis,target)} this position") 
-
-        elif(option==3):
-            target=int(input("Enter the target: "))
-            if(sentinel_Search(lis,target)==-1):
-                print("Element not found")
-            else:
-                print(f"Element on {sentinel_Search(lis,target)} this position") 
-
-        elif(option==4):
-            target=int(input("Enter the target: "))
-            if(binary_Search(lis,target)==-1):
-                print("Element not found")
-            else:
-                print(f"Element on {binary_Search(lis,target)} this position") 
-                
-        elif(option==4):
-            target=int(input("Enter the target: "))
-            if(binary_Search(lis,target)==-1):
-                print("Element not found")
-            else:
-                print(f"Element on {binary_Search(lis,target)} this position") 
-
-        
+    elif (s == 3):
+        print("\nBinary Search:")
+        l = 0
+        h = n-1
+        x = b_search(p, list1, h, l)
+        print("Roll Number %d did attend the program and its index is %d." % (p, x))
+    elif (s == 4):
+        print("\nFibonacci Search")
+        ind = fibMonaccianSearch(list1, p, n)
+        if (ind >= 0):
+            print("Student did attend the program at index:", ind)
+        else:
+            print(p, "isn't present in the array")
+    elif (s == 5):
+        print("\Exit")
+        break
+    else:
+        print("Invalid Option!")
